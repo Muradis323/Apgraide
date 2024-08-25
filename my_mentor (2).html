@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Апгрейд машина</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+        }
+        h2 {
+            color: #ffffff;
+            text-align: center;
+        }
+        .quran-verse {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #e67e22;
+            text-align: center;
+        }
+        .progress-bar-container {
+            margin: 20px 0;
+        }
+        .progress-bar {
+            background-color: #444444;
+            border-radius: 5px;
+            height: 30px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress {
+            height: 100%;
+            width: 0;
+            position: absolute;
+        }
+        .task {
+            background-color: #333333;
+            padding: 10px;
+            margin: 15px auto;
+            border-radius: 5px;
+            border: 1px solid #e67e22;
+            text-align: center;
+            max-width: 400px;
+        }
+        .task p {
+            margin: 0;
+        }
+        button {
+            background-color: black;
+            color: white;
+            padding: 10px 15px;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #444444;
+        }
+        button.completed {
+            background-color: #27ae60;
+            border-color: #27ae60;
+        }
+        button.failed {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .progress-label {
+            margin-bottom: 5px;
+        }
+        .progress-track {
+            width: 100%;
+            height: 15px;
+            background-color: #444444;
+            border-radius: 7.5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background-color: #27ae60;
+            transition: width 0.2s ease, background-color 0.2s ease;
+        }
+        .save-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #e67e22;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .save-button:hover {
+            background-color: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <h1>Апгрейд машина</h1>
+
+    <div class="quran-verse">
+        <p>"Воистину, Аллах не меняет положение людей, пока они сами не изменятся." (Сура 13:11)</p>
+    </div>
+
+    <div class="progress-bar-container">
+        <h2>Моя жизнь</h2>
+        <div class="progress-bar">
+            <div class="progress" id="time-progress"></div>
+        </div>
+    </div>
+
+    <p>Отслеживайте свой прогресс и выполняйте ежедневные задания, чтобы достичь своих целей в жизни.</p>
+
+    <h2>Ежедневные Задания</h2>
+    <div class="task">
+        <p>Совершил Тахаджуд намаз?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Встал на утренний намаз вовремя?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Читал утренние аскары?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Читал Коран?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не смотрел харамное?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не говорил харамное?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не слушал харамное?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не делал харамных движений?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Встал не позже 07:30?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Делал утреннюю зарядку и растяжку?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Ел полезный завтрак?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Есть план на день?</p>
+        <button class="task-btn" onclick="updateProgress('career', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('career', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Вовремя поехал на работу?</p>
+        <button class="task-btn" onclick="updateProgress('career', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('career', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Нормально поработал?</p>
+        <button class="task-btn" onclick="updateProgress('career', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('career', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Все задачи выполнил?</p>
+        <button class="task-btn" onclick="updateProgress('career', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('career', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Контролировал свой язык?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не переедал сегодня да?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Не пил много чая и сладкого не ел?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Читал вечерние аскары?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Читал книжку?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Был добр и почтителен к родным?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Прогулку делал?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Все намазы сделал вовремя?</p>
+        <button class="task-btn" onclick="updateProgress('iman', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('iman', false, this)">Нет</button>
+    </div>
+    <div class="task">
+        <p>Лёг спать вовремя?</p>
+        <button class="task-btn" onclick="updateProgress('health', true, this)">Да</button>
+        <button class="task-btn" onclick="updateProgress('health', false, this)">Нет</button>
+    </div>
+
+    <h2>Отслеживание Прогресса</h2>
+    <div class="progress-container">
+        <div class="progress-label">ИМАН:</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="iman"></div>
+        </div>
+    </div>
+    <div class="progress-container">
+        <div class="progress-label">Здоровье:</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="health"></div>
+        </div>
+    </div>
+    <div class="progress-container">
+        <div class="progress-label">Карьера:</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="career"></div>
+        </div>
+    </div>
+
+    <button class="save-button" onclick="saveProgress()">Сохранить процесс</button>
+
+    <script>
+        function calculateProgress(startDate, endDate) {
+            const currentDate = new Date();
+            const totalDuration = endDate - startDate;
+            const elapsedTime = currentDate - startDate;
+            return (elapsedTime / totalDuration) * 100;
+        }
+
+        function updateTimeProgress() {
+            const startDate = new Date('1996-08-19');
+            const endDate = new Date(startDate);
+            endDate.setFullYear(endDate.getFullYear() + 70);
+
+            const progressPercent = calculateProgress(startDate, endDate);
+
+            const progressBar = document.getElementById('time-progress');
+            progressBar.style.width = progressPercent + '%';
+
+            const red = Math.min(231, Math.floor((progressPercent / 100) * 231));
+            const green = Math.min(196, Math.floor(((100 - progressPercent) / 100) * 196));
+            const color = `rgb(${red}, ${green}, 15)`;
+
+            progressBar.style.backgroundColor = color;
+        }
+
+        function updateProgress(category, isPositive, button) {
+            const slider = document.getElementById(category);
+            let currentWidth = parseFloat(slider.style.width) || 0;
+            let adjustment = isPositive ? 5 : -5;
+            let newWidth = Math.min(Math.max(currentWidth + adjustment, 0), 100);
+            slider.style.width = newWidth + '%';
+
+            const color = newWidth > 50 ? '#27ae60' : (newWidth > 25 ? '#f1c40f' : '#e74c3c');
+            slider.style.backgroundColor = color;
+
+            // Disable and style only the clicked button
+            const buttons = button.parentElement.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn === button) {
+                    if (isPositive) {
+                        btn.classList.add('completed');
+                    } else {
+                        btn.classList.add('failed');
+                    }
+                } else {
+                    btn.classList.remove('completed', 'failed');
+                }
+            });
+        }
+
+        function saveProgress() {
+            alert('Прогресс сохранен!');
+        }
+
+        updateTimeProgress();
+    </script>
+</body>
+</html>
